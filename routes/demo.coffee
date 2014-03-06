@@ -1,5 +1,5 @@
 exports.demo = (req, res) ->
-  res.render "demo",
+  res.render "layouts/demo",
     title: "Lightside Demo"
 
   return

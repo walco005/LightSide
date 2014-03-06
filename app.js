@@ -33,6 +33,13 @@ Module dependencies.
     return console.log('DB connection opened');
   });
 
+  app.set('layout', 'layouts/demo');
+
+  app.set('partials', {
+    head: 'partials/head',
+    scripts: 'partials/scripts'
+  });
+
   app.set("port", process.env.PORT || 3000);
 
   app.set("views", path.join(__dirname, "views"));
@@ -54,6 +61,8 @@ Module dependencies.
   app.use(app.router);
 
   app.use(express["static"](path.join(__dirname, "public")));
+
+  app.use(express["static"](path.join(__dirname, 'bower_components')));
 
   if ("development" === app.get("env")) {
     app.use(express.errorHandler());
