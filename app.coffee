@@ -9,6 +9,7 @@ http = require("http")
 path = require("path")
 mongoose = require 'mongoose'
 app = express()
+demo = require("./routes/demo")
 
 #connect to database
 # ./mongodb/bin/mongod --dbpath ~/WebstormProjects/testProject2/db/
@@ -34,6 +35,7 @@ app.use express.static(path.join(__dirname, "public"))
 # development only
 app.use express.errorHandler()  if "development" is app.get("env")
 app.get "/", routes.index
+app.get "/demo", demo.demo
 app.get "/users", user.list
 http.createServer(app).listen app.get("port"), ->
     console.log "Express server listening on port " + app.get("port")

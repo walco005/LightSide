@@ -5,7 +5,7 @@ Module dependencies.
  */
 
 (function() {
-  var app, db, express, http, mongoose, path, routes, user;
+  var app, db, demo, express, http, mongoose, path, routes, user;
 
   express = require("express");
 
@@ -20,6 +20,8 @@ Module dependencies.
   mongoose = require('mongoose');
 
   app = express();
+
+  demo = require("./routes/demo");
 
   mongoose.connect('mongodb://localhost/test');
 
@@ -58,6 +60,8 @@ Module dependencies.
   }
 
   app.get("/", routes.index);
+
+  app.get("/demo", demo.demo);
 
   app.get("/users", user.list);
 
