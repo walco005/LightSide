@@ -1,5 +1,5 @@
 exports.demo = (req, res) ->
-  res.render "index",
+  res.render "demo",
     title: "Demo"
 
   return
