@@ -1,10 +1,11 @@
 class AppRouter extends Backbone.Router
   routes:
-    '': 'demo'
+    'demo': 'demo1'
 
-  demo: ->
-
+  demo1: ->
     $('#prebuilt').html new window.preBuiltView().$el
 
-app = new AppRouter()
-Backbone.history.start pushState: true
+
+$(document).ready ->
+  app = new AppRouter()
+  Backbone.history.start pushState: true
