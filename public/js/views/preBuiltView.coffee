@@ -3,7 +3,7 @@ class window.preBuiltView extends Backbone.View
   template: _.template $('#prebuilt-template').html()
 
   events:
-    "onclick button.submit": "submit"
+    "click button.submit": "submit"
 
   initialize: ->
     @render()
@@ -16,4 +16,8 @@ class window.preBuiltView extends Backbone.View
   submit: ->
 
     #insert API call here
-    demoText = $("#essayText").val
+    demoText = $("#essayText").val()
+    authorName = $("#name").val()
+    prompt = $("#prompt").val()
+
+    alert(authorName + " " + prompt + " " + demoText)
