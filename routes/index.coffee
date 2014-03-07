@@ -4,6 +4,6 @@
 # 
 exports.index = (req, res) ->
   res.render "index",
-    title: "Express"
+    title: "yo yo yo yo dis b"
 
   return

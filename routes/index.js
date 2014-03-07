@@ -2,7 +2,7 @@
 (function() {
   exports.index = function(req, res) {
     res.render("index", {
-      title: "Express"
+      title: "yo yo yo yo dis b"
     });
   };
 

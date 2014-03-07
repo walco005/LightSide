@@ -8,6 +8,7 @@ user = require("./routes/user")
 http = require("http")
 path = require("path")
 mongoose = require 'mongoose'
+demo = require("./routes/demo")
 app = express()
 demo = require("./routes/demo")
 
@@ -45,6 +46,7 @@ app.use express.errorHandler()  if "development" is app.get("env")
 app.get "/", routes.index
 app.get "/demo", demo.demo
 app.get "/users", user.list
+
 http.createServer(app).listen app.get("port"), ->
     console.log "Express server listening on port " + app.get("port")
 return

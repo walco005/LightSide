@@ -19,6 +19,8 @@ Module dependencies.
 
   mongoose = require('mongoose');
 
+  demo = require("./routes/demo");
+
   app = express();
 
   demo = require("./routes/demo");
