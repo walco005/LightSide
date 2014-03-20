@@ -5,7 +5,7 @@ Module dependencies.
  */
 
 (function() {
-  var app, db, demo, express, http, mongoose, path, routes, user;
+  var app, db, demo, essayRoute, express, http, mongoose, path, routes, user;
 
   express = require("express");
 
@@ -24,6 +24,8 @@ Module dependencies.
   app = express();
 
   demo = require("./routes/demo");
+
+  essayRoute = require("./routes/essayRoute");
 
   mongoose.connect('mongodb://localhost/test');
 
@@ -75,6 +77,8 @@ Module dependencies.
   app.get("/demo", demo.demo);
 
   app.get("/users", user.list);
+
+  app.get("/essaygrades", essayRoute.findAllEssays);
 
   http.createServer(app).listen(app.get("port"), function() {
     return console.log("Express server listening on port " + app.get("port"));
