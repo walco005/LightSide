@@ -76,6 +76,8 @@ Module dependencies.
 
   app.get("/users", user.list);
 
+  app.get("/demo", demo.preBuilt);
+
   http.createServer(app).listen(app.get("port"), function() {
     return console.log("Express server listening on port " + app.get("port"));
   });
