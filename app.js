@@ -23,8 +23,6 @@ Module dependencies.
 
   app = express();
 
-  demo = require("./routes/demo");
-
   mongoose.connect('mongodb://localhost/test');
 
   db = mongoose.connection;
@@ -76,7 +74,7 @@ Module dependencies.
 
   app.get("/users", user.list);
 
-  app.get("/demo", demo.preBuilt);
+  app.post("/demo", demo.preBuilt);
 
   http.createServer(app).listen(app.get("port"), function() {
     return console.log("Express server listening on port " + app.get("port"));

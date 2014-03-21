@@ -1,3 +1,8 @@
+querystring = require('querystring')
+https = require('https')
+fs = require('fs')
+https.globalAgent.options.secureProtocol = 'SSLv2_method';
+
 exports.demo = (req, res) ->
   res.render "layouts/demo",
     title: "Lightside Demo"
@@ -5,29 +10,31 @@ exports.demo = (req, res) ->
   return
 
 exports.preBuilt = (req, res) ->
-  querystring = require('querystring')
-  https = require('https')
-  fs = require('fs')
+  console.log "WE WENT THROUGH PREBUILT"
+  PostCode()
 
-  PostCode = (codestring) ->
+PostCode = () ->
 
     # Build the post string from an object
     post_data = querystring.stringify(
-      "designator": "test name"
+      "designator": "test name1"
     )
-
+    console.log "start"
     # An object of options to indicate where to post to
     post_options =
-      host: "https://try-api.lightsidelabs.com"
+      host: "try-api.lightsidelabs.com"
       port: "80"
       path: "/api/authors/"
       method: "POST"
+      data:
+        "designator": "test name1"
       headers:
         "Content-Type": "application/json"
-        "Content-Length": post_data.length
-        "Authorization": "Token 66d825a8733bbe1e48821e32c4849081f711f89b"
+        "Content-Length": Buffer.byteLength(post_data)
+        "Authorization": "Token"
 
 
+    console.log "after post_options"
 
     # Set up the request
     post_req = https.request(post_options, (res) ->
@@ -38,6 +45,7 @@ exports.preBuilt = (req, res) ->
 
       return
     )
+    console.log "after post_req"
 
     # post the data
     post_req.write post_data
@@ -65,12 +73,12 @@ exports.preBuilt = (req, res) ->
 #    return
 
 
-exports.preBuilt2 = (req, res) ->
-  data =
-    designator: "unique-designator-12345"
-
-  headers =
-    Authorization: "Token 66d825a8733bbe1e48821e32c4849081f711f89b"
-    "Content-Type": "application/json"
-
-  r = req.post("https://try-api.lightsidelabs.com/api/authors/", data = json.dumps(data), headers = headers)
+#exports.preBuilt2 = (req, res) ->
+#  data =
+#    designator: "unique-designator-12345"
+#
+#  headers =
+#    Authorization: "Token 66d825a8733bbe1e48821e32c4849081f711f89b"
+#    "Content-Type": "application/json"
+#
+#  r = req.post("https://try-api.lightsidelabs.com/api/authors/", data = json.dumps(data), headers = headers)
