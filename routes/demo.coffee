@@ -29,7 +29,7 @@ exports.preBuiltRequest = (req, res) ->
       Authorization: "Token "
       "Content-Type": "application/json"
   form:
-   designator: "Bop",
+   designator: req.body.name,
 
   (error, response, body) ->
     return console.error("upload failed:", error)  if error
