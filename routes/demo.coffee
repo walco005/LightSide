@@ -9,59 +9,32 @@ exports.demo = (req, res) ->
 
   return
 
-exports.preBuilt = (req, res) ->
-  console.log "WE WENT THROUGH PREBUILT"
-  PostCode()
-
-PostCode = () ->
-
-    # Build the post string from an object
-    post_data = querystring.stringify(
-      "designator": "test name1"
-    )
-    console.log "start"
-    # An object of options to indicate where to post to
-    post_options =
-      url: "API URL"
-      data:
-        "designator": "test name1"
-      headers:
-        "Content-Type": "application/json"
-        #"Content-Length": Buffer.byteLength(post_data)
-        "Authorization": "Token"
-
-
-    console.log "after post_options"
-
-    # Set up the request
-    post_req = https.request(post_options, (res) ->
-      res.setEncoding "utf-8"
-      res.on "data", (chunk) ->
-        console.log "Response: " + chunk
-        return
-
-      return
-    )
-    console.log "after post_req"
-
-    # post the data
-    post_req.write post_data
-    post_req.end()
-    return
-
 exports.preBuiltRequest = (req, res) ->
-  options =
-    url: "https://try-api.lightsidelabs.com/api/authors/"
-    method: "post"
-    headers:
-      Authorization: "Token"
+#  options =
+#    url: "https://try-api.lightsidelabs.com/api/authors/"
+#    method: "post"
+#    headers:
+#      Authorization: "Token "
+#      "Content-Type": "application/json"
+#
+#  data = designator: "test name"
+#
+#  request options, data, (error, response, body) ->
+#    console.log body
+#    return
+
+
+ request.post 'https://try-api.lightsidelabs.com/api/authors/',
+  headers:
+      Authorization: "Token "
       "Content-Type": "application/json"
+  form:
+   designator: "heydude",
 
-  data = designator: "test name"
+  (error, response, body) ->
+   console.log body
+   return
 
-  request options, data, (error, response, body) ->
-    console.log body
-    return
 
 
 #  # This is an async file read
