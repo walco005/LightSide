@@ -45,7 +45,7 @@ app.use express.errorHandler()  if "development" is app.get("env")
 app.get "/", routes.index
 app.get "/demo", demo.demo
 app.get "/users", user.list
-app.post "/demo", demo.preBuiltRequest
+app.post "/demo", demo.getRequest
 
 http.createServer(app).listen app.get("port"), ->
     console.log "Express server listening on port " + app.get("port")

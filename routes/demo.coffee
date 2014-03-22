@@ -9,29 +9,46 @@ exports.demo = (req, res) ->
 
   return
 
+#POSTS AUTHOR
 exports.preBuiltRequest = (req, res) ->
-#  options =
-#    url: "https://try-api.lightsidelabs.com/api/authors/"
-#    method: "post"
-#    headers:
-#      Authorization: "Token "
-#      "Content-Type": "application/json"
-#
-#  data = designator: "test name"
-#
-#  request options, data, (error, response, body) ->
-#    console.log body
-#    return
-
 
  request.post 'https://try-api.lightsidelabs.com/api/authors/',
   headers:
-      Authorization: "Token "
+      Authorization: "Token"
       "Content-Type": "application/json"
   form:
-   designator: req.body.name,
+   designator: req.body.authorName,
 
   (error, response, body) ->
     return console.error("upload failed:", error)  if error
     console.log "Upload successful!  Server responded with:", body
+    return
+
+#DELETES AUTHORS
+exports.deleteAuthor = (req, res) ->
+
+  request.del 'https://try-api.lightsidelabs.com/api/authors/',
+  headers:
+    Authorization: "Token"
+    "Content-Type": "application/json"
+
+  (error, response, body) ->
+    return console.error("upload failed:", error)  if error
+    console.log "Upload successful!  Server responded with:", body
+    return
+
+#GET CURRENT STATE OF AUTHORS
+exports.getRequest = (req, res) ->
+  options =
+    url: "https://try-api.lightsidelabs.com/api/authors/"
+    method: "get"
+    headers:
+      Authorization: "Token"
+      "Content-Type": "application/json"
+
+  request options,(error, response, body) ->
+    mostRecentAuthor = JSON.parse(body).results[0]
+    mostRecentToken = mostRecentAuthor.auth_token
+    console.log mostRecentAuthor
+    console.log mostRecentToken
     return
