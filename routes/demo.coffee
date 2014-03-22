@@ -29,12 +29,13 @@ exports.preBuiltRequest = (req, res) ->
       Authorization: "Token "
       "Content-Type": "application/json"
   form:
-   designator: "B",
+   designator: "Bop",
 
   (error, response, body) ->
-   console.log body
-   return
- request.end
+    return console.error("upload failed:", error)  if error
+    console.log "Upload successful!  Server responded with:", body
+    return
+
 
 
 #  # This is an async file read
