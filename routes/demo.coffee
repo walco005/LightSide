@@ -29,12 +29,12 @@ exports.preBuiltRequest = (req, res) ->
       Authorization: "Token "
       "Content-Type": "application/json"
   form:
-   designator: "heydude",
+   designator: "B",
 
   (error, response, body) ->
    console.log body
    return
-
+ request.end
 
 
 #  # This is an async file read
