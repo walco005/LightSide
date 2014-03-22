@@ -1,7 +1,7 @@
 querystring = require('querystring')
 https = require('https')
 fs = require('fs')
-https.globalAgent.options.secureProtocol = 'SSLv2_method';
+request = require('request')
 
 exports.demo = (req, res) ->
   res.render "layouts/demo",
@@ -22,15 +22,12 @@ PostCode = () ->
     console.log "start"
     # An object of options to indicate where to post to
     post_options =
-      host: "try-api.lightsidelabs.com"
-      port: "80"
-      path: "/api/authors/"
-      method: "POST"
+      url: "API URL"
       data:
         "designator": "test name1"
       headers:
         "Content-Type": "application/json"
-        "Content-Length": Buffer.byteLength(post_data)
+        #"Content-Length": Buffer.byteLength(post_data)
         "Authorization": "Token"
 
 
@@ -51,6 +48,21 @@ PostCode = () ->
     post_req.write post_data
     post_req.end()
     return
+
+exports.preBuiltRequest = (req, res) ->
+  options =
+    url: "https://try-api.lightsidelabs.com/api/authors/"
+    method: "post"
+    headers:
+      Authorization: "Token"
+      "Content-Type": "application/json"
+
+  data = designator: "test name"
+
+  request options, data, (error, response, body) ->
+    console.log body
+    return
+
 
 #  # This is an async file read
 #  fs.readFile "LinkedList.js", "utf-8", (err, data) ->
