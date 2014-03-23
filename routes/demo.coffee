@@ -45,11 +45,14 @@ exports.getRequest = (req, res) ->
     headers:
       Authorization: "Token "
       "Content-Type": "application/json"
-
   request options,(error, response, body) ->
-    mostRecentAuthor = JSON.parse(body).results[0]
-    mostRecentToken = mostRecentAuthor.auth_token
-    console.log mostRecentAuthor
+    mostRecentSubmission = JSON.parse(body).results[0]
+    mostRecentToken = mostRecentSubmission.auth_token
+    console.log mostRecentSubmission
     console.log mostRecentToken
-    res.render "index", mostRecentAuthor
+    res.render "index",
+      title: 'Justin'
+      author: mostRecentSubmission.designator
+      token:  mostRecentToken
+
     return

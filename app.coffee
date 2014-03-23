@@ -43,7 +43,6 @@ app.use express.static(path.join(__dirname, 'bower_components'))
 # development only
 app.use express.errorHandler()  if "development" is app.get("env")
 app.get "/", routes.index
-app.post "/", routes.index
 app.get "/demo", demo.demo
 app.get "/users", user.list
 app.post "/demo", demo.getRequest

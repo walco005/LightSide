@@ -23,7 +23,7 @@
     });
     res.render("index", {
       title: "Lightside",
-      author: res.author,
+      author: '',
       token: ""
     });
   };

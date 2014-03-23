@@ -70,8 +70,6 @@ Module dependencies.
 
   app.get("/", routes.index);
 
-  app.post("/", routes.index);
-
   app.get("/demo", demo.demo);
 
   app.get("/users", user.list);
