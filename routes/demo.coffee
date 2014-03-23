@@ -6,21 +6,6 @@ request = require('request')
 exports.demo = (req, res) ->
   res.render "layouts/demo",
     title: "Lightside Demo"
-
-#  request.post 'https://try-api.lightsidelabs.com/api/prompts/',
-#   headers:
-#        Authorization: "Token 66d825a8733bbe1e48821e32c4849081f711f89b"
-#        "Content-Type": "application/json"
-#   form:
-#        title: 'David',
-#        text: "Who is that dude?"
-#        instructions: "Use two words only"
-#        description: "Accurately describe who David is."
-#
-#   (error, response, body) ->
-#     return console.error("upload failed:", error)  if error
-#     console.log "Upload successful!  Server responded with:", body
-#     return
   return
 
 #POSTS AUTHOR
