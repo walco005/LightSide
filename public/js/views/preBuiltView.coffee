@@ -4,6 +4,7 @@ class window.preBuiltView extends Backbone.View
 
   events:
     "click button.submit": "submit"
+#    "change select.prompt": "changePrompt"
 
   initialize: ->
     @render()
@@ -17,3 +18,6 @@ class window.preBuiltView extends Backbone.View
     demoText = $("#essayText").val()
     authorName = $("#name").val()
     prompt = $("#prompt").val()
+
+#  changePrompt: ->
+

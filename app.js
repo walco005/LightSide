@@ -74,7 +74,7 @@ Module dependencies.
 
   app.get("/users", user.list);
 
-  app.post("/demo", demo.getRequest);
+  app.post("/demo", demo.answerPost);
 
   app.get("/essaygrades", essayRoute.findAllEssays);
 

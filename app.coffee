@@ -45,7 +45,8 @@ app.use express.errorHandler()  if "development" is app.get("env")
 app.get "/", routes.index
 app.get "/demo", demo.demo
 app.get "/users", user.list
-app.post "/demo", demo.getRequest
+app.post "/demo", demo.answerPost
+#app.post "/demo", demo.preBuiltRequest
 app.get "/essaygrades", essayRoute.findAllEssays
 
 http.createServer(app).listen app.get("port"), ->
