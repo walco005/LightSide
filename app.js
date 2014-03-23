@@ -5,7 +5,7 @@ Module dependencies.
  */
 
 (function() {
-  var app, db, demo, express, http, mongoose, path, routes, user;
+  var app, db, demo, essayRoute, express, http, mongoose, path, routes, user;
 
   express = require("express");
 
@@ -23,6 +23,8 @@ Module dependencies.
 
   app = express();
 
+  essayRoute = require("./routes/essayRoute");
+
   mongoose.connect('mongodb://localhost/test');
 
   db = mongoose.connection;
@@ -32,8 +34,6 @@ Module dependencies.
   db.once('open', function() {
     return console.log('DB connection opened');
   });
-
-  app.set('layout', 'layouts/demo');
 
   app.set('partials', {
     head: 'partials/head',
@@ -70,11 +70,15 @@ Module dependencies.
 
   app.get("/", routes.index);
 
+  app.post("/", routes.index);
+
   app.get("/demo", demo.demo);
 
   app.get("/users", user.list);
 
   app.post("/demo", demo.getRequest);
+
+  app.get("/essaygrades", essayRoute.findAllEssays);
 
   http.createServer(app).listen(app.get("port"), function() {
     return console.log("Express server listening on port " + app.get("port"));

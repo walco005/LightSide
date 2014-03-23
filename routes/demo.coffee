@@ -14,7 +14,7 @@ exports.preBuiltRequest = (req, res) ->
 
  request.post 'https://try-api.lightsidelabs.com/api/authors/',
   headers:
-      Authorization: "Token"
+      Authorization: "Token "
       "Content-Type": "application/json"
   form:
    designator: req.body.authorName,
@@ -29,7 +29,7 @@ exports.deleteAuthor = (req, res) ->
 
   request.del 'https://try-api.lightsidelabs.com/api/authors/',
   headers:
-    Authorization: "Token"
+    Authorization: "Token "
     "Content-Type": "application/json"
 
   (error, response, body) ->
@@ -43,7 +43,7 @@ exports.getRequest = (req, res) ->
     url: "https://try-api.lightsidelabs.com/api/authors/"
     method: "get"
     headers:
-      Authorization: "Token"
+      Authorization: "Token "
       "Content-Type": "application/json"
 
   request options,(error, response, body) ->
@@ -51,4 +51,7 @@ exports.getRequest = (req, res) ->
     mostRecentToken = mostRecentAuthor.auth_token
     console.log mostRecentAuthor
     console.log mostRecentToken
+    res.render "index"
+     author: mostRecentAuthor
+     token: mostRecentToken
     return

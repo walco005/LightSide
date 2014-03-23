@@ -10,6 +10,7 @@ path = require("path")
 mongoose = require 'mongoose'
 demo = require("./routes/demo")
 app = express()
+essayRoute = require("./routes/essayRoute")
 
 #connect to database
 # ./mongodb/bin/mongod --dbpath ~/WebstormProjects/testProject2/db/
@@ -20,7 +21,6 @@ db.once 'open', ->
   console.log 'DB connection opened'
 
 #set main layout
-app.set 'layout', 'layouts/demo'
 #expose templates to all views
 app.set 'partials',
   head: 'partials/head',
@@ -43,9 +43,11 @@ app.use express.static(path.join(__dirname, 'bower_components'))
 # development only
 app.use express.errorHandler()  if "development" is app.get("env")
 app.get "/", routes.index
+app.post "/", routes.index
 app.get "/demo", demo.demo
 app.get "/users", user.list
 app.post "/demo", demo.getRequest
+app.get "/essaygrades", essayRoute.findAllEssays
 
 http.createServer(app).listen app.get("port"), ->
     console.log "Express server listening on port " + app.get("port")
