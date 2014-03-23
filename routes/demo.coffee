@@ -51,7 +51,5 @@ exports.getRequest = (req, res) ->
     mostRecentToken = mostRecentAuthor.auth_token
     console.log mostRecentAuthor
     console.log mostRecentToken
-    res.render "index"
-     author: mostRecentAuthor
-     token: mostRecentToken
+    res.render "index", mostRecentAuthor
     return

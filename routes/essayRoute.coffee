@@ -1,7 +1,7 @@
-Grades = require('../schemas/schemas').EssayGrades
+Essay = require('../schemas/schemas').EssayGrades
 
 # Populate the database if there are no records
-Grades.count({},(err, c) ->
+Essay.count({},(err, c) ->
   console.log err if err
   if c == 0
     console.log 'Populating database'
@@ -10,19 +10,19 @@ Grades.count({},(err, c) ->
 
 
 exports.findAllEssays = (req, res) ->
-  Grades.find (err, items) ->
+  Essay.find (err, items) ->
     console.log("Calling findAllEssays")
     res.send items
 
 exports.create = (req, res) ->
-  newEssayGrade = new Grades req.body
+  newEssayGrade = new Essay req.body
   console.log 'created essay grade for ' + newEssayGrade.Author
   newEssayGrade.save()
   res.send()
 
-exports.getByIdAuthor = (req, res) ->
+exports.getByAuthor = (req, res) ->
   id = req.route.params['Author']
-  Grades.findById id, (err, result) ->
+  Essay.findById id, (err, result) ->
     res.send result
 
 populateDB = ->
@@ -39,5 +39,5 @@ populateDB = ->
 
 
 createAndAdd = (sec)->
-  newEssays = new Grades(sec)
+  newEssays = new Essay(sec)
   newEssays.save()
