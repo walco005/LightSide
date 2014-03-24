@@ -92,6 +92,8 @@ exports.submitEssay = (req, res) ->
   authorList = []
   authorListURL = []
   essayText = req.body.essayText
+  totalEssaysSubmittedForAuthors = []
+  numAuthEssays = 0
   console.log 'this is ' + essayText
 
   optionsCreateAuthor =
@@ -131,28 +133,39 @@ exports.submitEssay = (req, res) ->
       prompt: "https://try-api.lightsidelabs.com/api/prompts/6",
       trained_models: []
 
-  request optionsPostAnswerSet, (error, response, body) ->
-   console.log body
+#  request optionsPostAnswerSet, (error, response, body) ->
+#   console.log body
 
   request optionsGetAuthors, (error, response, body) ->
+    console.log 'Got Authors'
     i = 0
+    console.log JSON.parse(body).results
     while i < JSON.parse(body).results.length
       authorList[i] = JSON.parse(body).results[i].designator
+      console.log authorList
       authorListURL[i] = JSON.parse(body).results[i].url
+      console.log authorListURL
+      totalEssaysSubmittedForAuthors[i] = JSON.parse(body).results[i].answers.length + 1
+      console.log totalEssaysSubmittedForAuthors[i]
       i++
-  if not author in authorList
-    request optionsCreateAuthor, (error, response, body) ->
-      console.log 'hello'
+    if author in authorList
+      console.log 'You have found an author'
+      console.log author
+      console.log authorList.indexOf(author)
+      authorIndex = authorList.indexOf(author)
+      authorURL = authorListURL[authorIndex]
+      numAuthEssays = totalEssaysSubmittedForAuthors[authorIndex]
+    else
+      request optionsCreateAuthor, (error, response, body) ->
+      console.log 'You have created an author'
       console.log body
       authorList.push JSON.parse(body).designator
       authorListURL.push JSON.parse(body).url
-    authorIndex = authorList.indexOf(author)
-    authorURL = authorListURL[authorIndex]
-  else
-    authorIndex = authorList.indexOf(author)
-    authorURL = authorListURL[authorIndex]
-
-  optionsPostAnswer =
+      authorIndex = authorList.indexOf(author)
+      authorURL = authorListURL[authorIndex]
+      numAuthEssays = 1
+    console.log numAuthEssays + 'hi'
+    optionsPostAnswer =
      url: "https://try-api.lightsidelabs.com/api/answers/"
      method: "post"
      headers:
@@ -163,13 +176,14 @@ exports.submitEssay = (req, res) ->
        answer_set: "https://try-api.lightsidelabs.com/api/answer-sets/76",
        text: essayText
 
-  request optionsPostAnswer, (error, response, body) ->
-    console.log 'POSTANSWER'
-    console.log body
+    request optionsPostAnswer, (error, response, body) ->
+      console.log 'POSTANSWER'
+      console.log body
     res.render "index",
       title: 'Submission Complete'
       author: author
       text: essayText
+      numberOfEssays: numAuthEssays
   return
 
 
@@ -208,7 +222,7 @@ exports.getRequest = (req, res) ->
     mostRecentToken = mostRecentSubmission.auth_token
 #    console.log mostRecentSubmission
 #    console.log mostRecentToken
-    res.render "ireq.body.authorNamendex",
+    res.render "index",
       title: 'HEY'
       author: mostRecentSubmission.designator
     return

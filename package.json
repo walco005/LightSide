@@ -8,16 +8,17 @@
     "blanket-cov": "node_modules/mocha/bin/_mocha --require blanket --reporter json-cov --timeout 60000"
   },
   "dependencies": {
-      "express": "3.4.8",
-      "hogan-express": "0.5.2",
-      "coffee-script": "1.7.x",
-      "mongoose": "~3.8.4",
-      "login-mongo": "*",
-      "request": "*"
+    "express": "3.4.8",
+    "hogan-express": "0.5.2",
+    "coffee-script": "1.7.x",
+    "mongoose": "~3.8.4",
+    "login-mongo": "*",
+    "request": "*",
+    "nodemon": "~1.0.17"
   },
   "config": {
-      "blanket": {
-          "pattern": "[dir_to_cover, file_to_cover.js, etc]"
-      }
+    "blanket": {
+      "pattern": "[dir_to_cover, file_to_cover.js, etc]"
+    }
   }
 }
