@@ -2,14 +2,16 @@ querystring = require('querystring')
 https = require('https')
 fs = require('fs')
 request = require('request')
+token = fs.readFileSync "Token.txt", "utf8"
 
 exports.demo = (req, res) ->
 
+  console.log token + 'is token'
   options =
     url: "https://try-api.lightsidelabs.com/api/prompts/6"
     method: "get"
     headers:
-      Authorization: "Token "
+      Authorization: token
       "Content-Type": "application/json"
   request options,(error, response, body) ->
     defaultPrompt= JSON.parse(body).text
@@ -25,7 +27,7 @@ exports.authorPost = (req, res) ->
     url: "https://try-api.lightsidelabs.com/api/authors/"
     method: "post"
     headers:
-      Authorization: "Token "
+      Authorization: token
       "Content-Type": "application/json"
     form:
       designator: 'David'
@@ -46,7 +48,7 @@ exports.answerSetPost = (req, res) ->
 #    url: "https://try-api.lightsidelabs.com/api/answer-sets/"
 #    method: "post"
 #    headers:
-#      Authorization: "Token "
+#      Authorization: token
 #      "Content-Type": "application/json"
 #    form:
 #      prompt: "https://try-api.lightsidelabs.com/api/prompts/6",
@@ -70,7 +72,7 @@ exports.answerPost = (req, res) ->
     url: "https://try-api.lightsidelabs.com/api/answers/"
     method: "post"
     headers:
-      Authorization: "Token "
+      Authorization: token
       "Content-Type": "application/json"
     form:
       author: "https://try-api.lightsidelabs.com/api/authors/29",
@@ -100,7 +102,7 @@ exports.submitEssay = (req, res) ->
     url: "https://try-api.lightsidelabs.com/api/authors/"
     method: "post"
     headers:
-      Authorization: "Token "
+      Authorization: token
       "Content-Type": "application/json"
     form:
       designator: req.body.authorName
@@ -109,14 +111,14 @@ exports.submitEssay = (req, res) ->
     url: "https://try-api.lightsidelabs.com/api/authors/"
     method: "get"
     headers:
-      Authorization: "Token "
+      Authorization: token
       "Content-Type": "application/json"
 
   optionsPostAnswer =
     url: "https://try-api.lightsidelabs.com/api/answers/"
     method: "post"
     headers:
-      Authorization: "Token "
+      Authorization: token
       "Content-Type": "application/json"
     form:
       author: authorURL,
@@ -127,7 +129,7 @@ exports.submitEssay = (req, res) ->
     url: "https://try-api.lightsidelabs.com/api/answer-sets/"
     method: "post"
     headers:
-      Authorization: "Token "
+      Authorization: token
       "Content-Type": "application/json"
     form:
       prompt: "https://try-api.lightsidelabs.com/api/prompts/6",
@@ -169,7 +171,7 @@ exports.submitEssay = (req, res) ->
      url: "https://try-api.lightsidelabs.com/api/answers/"
      method: "post"
      headers:
-       Authorization: "Token "
+       Authorization: token
        "Content-Type": "application/json"
      form:
        author: authorURL,
@@ -193,7 +195,7 @@ exports.deleteAuthor = (req, res) ->
 
   request.del 'https://try-api.lightsidelabs.com/api/authors/',
   headers:
-    Authorization: "Token "
+    Authorization: token
     "Content-Type": "application/json"
 
   (error, response, body) ->
@@ -210,7 +212,7 @@ exports.getRequest = (req, res) ->
     url: "https://try-api.lightsidelabs.com/api/authors/"
     method: "get"
     headers:
-      Authorization: "Token "
+      Authorization: token
       "Content-Type": "application/json"
   request options,(error, response, body) ->
     i = 0
@@ -233,7 +235,7 @@ exports.postAnswerSet = (req,res) ->
     url: "https://try-api.lightsidelabs.com/api/answer-sets/"
     method: "get"
     headers:
-      Authorization: "Token "
+      Authorization: token
       "Content-Type": "application/json"
 #    form:
 #      prompt: "https://try-api.lightsidelabs.com/api/prompts/6",
@@ -249,7 +251,7 @@ exports.postAnswerSet = (req,res) ->
 #    url: "https://try-api.lightsidelabs.com/api/" + url
 #    method: method
 #    headers:
-#      Authorization: "Token "
+#      Authorization: token
 #      "Content-Type": "application/json"
 #    form:
 #      forms
