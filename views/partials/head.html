@@ -9,13 +9,16 @@
 <meta content="utf-8" https-equiv="encoding">
 
 <script id="prebuilt-template" type="text/html">
-    <select name="prompt" id="prompt">
-        <option value="prompt1">Who is David?</option>
-    </select>
+    <h4> Prompt:</h4>
+    {{{prompt}}}
+
+    <!--<select name="prompt" id="prompt">-->
+        <!--<option value="prompt1">{{pro</option>-->
+    <!--</select>-->
 
     <form action="" method="post">
         <input type="text" name="authorName" id="authorName" placeholder="Author's Name"><br>
-        <textarea id="essayText" rows="20" cols="70" placeholder="Copy your essay here."></textarea> </br>
+        <textarea id="essayText" name="essayText" rows="20" cols="70" placeholder="Copy your essay here."></textarea> </br>
         <button class="btn submit" id="submit" value="Submit Essay" name="Submit Essay">Submit essay</button>
     </form>
 

@@ -4,11 +4,21 @@ fs = require('fs')
 request = require('request')
 
 exports.demo = (req, res) ->
-  res.render "layouts/demo",
-    title: "Lightside Demo"
-  return
 
-#POSTS AUTHOR
+  options =
+    url: "https://try-api.lightsidelabs.com/api/prompts/6"
+    method: "get"
+    headers:
+      Authorization: "Token "
+      "Content-Type": "application/json"
+  request options,(error, response, body) ->
+    defaultPrompt= JSON.parse(body).text
+    console.log defaultPrompt
+    res.render "layouts/demo",
+      title: "Lightside Demo"
+      prompt: defaultPrompt
+    return
+
 exports.authorPost = (req, res) ->
   options =
     url: "https://try-api.lightsidelabs.com/api/authors/"
@@ -36,7 +46,7 @@ exports.answerSetPost = (req, res) ->
       Authorization: "Token "
       "Content-Type": "application/json"
     form:
-      prompt: "https://try-api.lightsidelabs.com/api/prompts/82",
+      prompt: "https://try-api.lightsidelabs.com/api/prompts/6",
       trained_models: []
 
   request options,(error, response, body) ->
@@ -52,6 +62,7 @@ exports.answerSetPost = (req, res) ->
 
 #POSTS ANSWER
 exports.answerPost = (req, res) ->
+
   options =
     url: "https://try-api.lightsidelabs.com/api/answers/"
     method: "post"
@@ -64,11 +75,46 @@ exports.answerPost = (req, res) ->
       text: "This is another answer in answer set 76."
 
   request options,(error, response, body) ->
-    console.log body
     res.render "index",
       title: ''
       author: ""
       token:  ""
+    return
+
+#POSTS ANSWER
+exports.submitEssay = (req, res) ->
+  author = req.body.authorName
+  essayText = req.body.essayText
+  console.log 'this is ' + essayText
+  options =
+    url: "https://try-api.lightsidelabs.com/api/answers/"
+    method: "post"
+    headers:
+      Authorization: "Token "
+      "Content-Type": "application/json"
+    form:
+      author: "https://try-api.lightsidelabs.com/api/authors/29",
+      answer_set: "https://try-api.lightsidelabs.com/api/answer-sets/76",
+      text: "This is another answer in answer set 76."
+
+  options2 =
+    url: "https://try-api.lightsidelabs.com/api/answer-sets/"
+    method: "post"
+    headers:
+      Authorization: "Token "
+      "Content-Type": "application/json"
+    form:
+      prompt: "https://try-api.lightsidelabs.com/api/prompts/6",
+      trained_models: []
+
+  request options, (error, response, body) ->
+    console.log 'hello'
+    console.log body
+    res.render "index",
+      title: 'Submission Complete'
+      author: author
+      text: essayText
+
     return
 
 
@@ -100,25 +146,24 @@ exports.getRequest = (req, res) ->
     mostRecentToken = mostRecentSubmission.auth_token
     console.log mostRecentSubmission
     console.log mostRecentToken
-    res.render "index",
+    res.rendRequester "index",
       title: ''
       author: mostRecentSubmission.designator
       token:  mostRecentToken
     return
 
-createAuthor= (req, res) ->
-  request.post 'https://try-api.lightsidelabs.com/api/authors/',
-    headers:
-      Authorization: "Token "
-      "Content-Type": "application/json"
-    form:
-     designator: req.body.authorName,
-
-  (error, response, body) ->
-    return console.error("upload failed:", error)  if error
-    console.log "Upload successful!  Server responded with:", body
-    console.log response.url
-    return
-  request.end
-
-
+#getauth = () ->
+#  options =
+#    url: "https://try-api.lightsidelabs.com/api/authors/"
+#    method: "get"
+#    headers:
+#      Authorization: "Token "
+#      "Content-Type": "application/json"
+#  request options,(error, response, body) ->
+#
+#    mostRecentSubmission = JSON.parse(body).results[0]
+#    mostRecentToken = mostRecentSubmission.auth_token
+#    console.log mostRecentSubmission
+#    console.log mostRecentToken
+#
+#    return

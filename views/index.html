@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title> sdfasdfasd {{ title }}</title>
+    <title> {{ title }}</title>
 
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" https-equiv="encoding">
   </head>
   <body>
-    <h1>Congrats {{ title }}</h1>
-    <p> {{author}} has finished submitting their first essay to LightSide </p>
+    <h1>Congrats {{ author }}</h1>
+    <p> You have finished submitting their first essay to LightSide </p>
+    <h4> This is what you submitted </h4>
+    {{{text}}}
 
   </body>
 </html>
