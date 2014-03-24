@@ -9,7 +9,7 @@ exports.demo = (req, res) ->
     url: "https://try-api.lightsidelabs.com/api/prompts/6"
     method: "get"
     headers:
-      Authorization: "Token 66d825a8733bbe1e48821e32c4849081f711f89b"
+      Authorization: "Token "
       "Content-Type": "application/json"
   request options,(error, response, body) ->
     defaultPrompt= JSON.parse(body).text
@@ -25,7 +25,7 @@ exports.authorPost = (req, res) ->
     url: "https://try-api.lightsidelabs.com/api/authors/"
     method: "post"
     headers:
-      Authorization: "Token 66d825a8733bbe1e48821e32c4849081f711f89b"
+      Authorization: "Token "
       "Content-Type": "application/json"
     form:
       designator: 'David'
@@ -70,7 +70,7 @@ exports.answerPost = (req, res) ->
     url: "https://try-api.lightsidelabs.com/api/answers/"
     method: "post"
     headers:
-      Authorization: "Token 66d825a8733bbe1e48821e32c4849081f711f89b"
+      Authorization: "Token "
       "Content-Type": "application/json"
     form:
       author: "https://try-api.lightsidelabs.com/api/authors/29",
@@ -114,7 +114,7 @@ exports.submitEssay = (req, res) ->
     url: "https://try-api.lightsidelabs.com/api/answers/"
     method: "post"
     headers:
-      Authorization: "Token 66d825a8733bbe1e48821e32c4849081f711f89b"
+      Authorization: "Token "
       "Content-Type": "application/json"
     form:
       author: authorURL,
@@ -125,7 +125,7 @@ exports.submitEssay = (req, res) ->
     url: "https://try-api.lightsidelabs.com/api/answer-sets/"
     method: "post"
     headers:
-      Authorization: "Token 66d825a8733bbe1e48821e32c4849081f711f89b"
+      Authorization: "Token "
       "Content-Type": "application/json"
     form:
       prompt: "https://try-api.lightsidelabs.com/api/prompts/6",
@@ -156,7 +156,7 @@ exports.submitEssay = (req, res) ->
      url: "https://try-api.lightsidelabs.com/api/answers/"
      method: "post"
      headers:
-       Authorization: "Token 66d825a8733bbe1e48821e32c4849081f711f89b"
+       Authorization: "Token "
        "Content-Type": "application/json"
      form:
        author: authorURL,
@@ -196,7 +196,7 @@ exports.getRequest = (req, res) ->
     url: "https://try-api.lightsidelabs.com/api/authors/"
     method: "get"
     headers:
-      Authorization: "Token 66d825a8733bbe1e48821e32c4849081f711f89b"
+      Authorization: "Token "
       "Content-Type": "application/json"
   request options,(error, response, body) ->
     i = 0
@@ -219,7 +219,7 @@ exports.postAnswerSet = (req,res) ->
     url: "https://try-api.lightsidelabs.com/api/answer-sets/"
     method: "get"
     headers:
-      Authorization: "Token 66d825a8733bbe1e48821e32c4849081f711f89b"
+      Authorization: "Token "
       "Content-Type": "application/json"
 #    form:
 #      prompt: "https://try-api.lightsidelabs.com/api/prompts/6",
@@ -235,7 +235,7 @@ exports.postAnswerSet = (req,res) ->
 #    url: "https://try-api.lightsidelabs.com/api/" + url
 #    method: method
 #    headers:
-#      Authorization: "Token 66d825a8733bbe1e48821e32c4849081f711f89b"
+#      Authorization: "Token "
 #      "Content-Type": "application/json"
 #    form:
 #      forms
